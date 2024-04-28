@@ -18,6 +18,10 @@ const port = process.env.PORT || 5000;
 app.use(express.json()) // for parsing application/json
 app.use(express.urlencoded({ extended: false }))
 
+app.get('/', (req, res) => {
+   res.json({ message: 'Welcome to the TaskQuik api' })
+})
+
 app.use('/api/users', userRouter)
 app.use('/api/tasks', taskRouter)
 
