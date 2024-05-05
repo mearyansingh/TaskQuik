@@ -10,7 +10,7 @@ function Footer() {
                <Link to="/" className="fw-bold navbar-brand mb-3 me-2 mb-md-0 text-body-secondary text-decoration-none lh-1">
                   TaskQuik
                </Link>
-               <small className="mb-3 mb-md-0 text-body-secondary">© 2024 Made with ❤️ by Dev Aryan</small>
+               <small className="mb-3 mb-md-0 text-body-secondary">© 2024 Made with ❤️ by <a href='https://devaryan.online' target='_blank'>Dev Aryan</a></small>
             </Col>
             <ul className="nav col-md-4 d-flex justify-content-end list-unstyled">
                <li><a className="text-body-secondary" href="https://facebook.com/iaryansingh.me" rel="noreferrer" target='_blank'><i className='bi bi-facebook'></i></a></li>

@@ -6,7 +6,6 @@ import { toast } from 'react-toastify'
 import { Loader } from '../Components/GlobalComponents'
 import { deleteTask, getTask } from '../features/tasks/taskSlice'
 import { reset } from '../features/auth/authSlice'
-
 function Task() {
 
 	const { task, isLoading, isError, message } = useSelector(state => state.tasks)
@@ -23,19 +22,6 @@ function Task() {
 		dispatch(reset())
 	}, [isError, message, dispatch, id])
 
-	console.log(task)
-
-	const onHandleDelete = async (taskId) => {
-		// dispatch(deleteTask(taskId))
-		try {
-			await dispatch(deleteTask(taskId));
-			navigate('/tasks');
-		} catch (error) {
-			// Handle any errors here, if necessary
-			// Display an error toaster message, if required
-			toast.error('Failed to delete account. Please try again later.');
-		}
-	}
 	return (
 		<section className="p-3 p-md-4 p-xl-5">
 			<Container>
@@ -64,30 +50,11 @@ function Task() {
 									<p className='fw-bold mb-0'>Description of task:</p>
 									<span>{task.description}</span>
 								</div>
-								<Button>Update</Button>
-								<Button variant='danger' onClick={() => onHandleDelete(task._id)}>Delete</Button>
 							</div>
 						</Card.Body>
 					</Card>
 				}
-			</Container >
-			{/* <PopupContainer
-            ref={_addNotePopup}
-            title="Add Note"
-            subTitle="this is subtitle"
-            dialogClassName="custom-popup--sm modal-dialog-sm-end"
-            isHeader={true}
-         >
-            <AddNotePopup
-               callback={(status, data) => {
-                  _addNotePopup.current.closeModal();
-                  if (status && data) {
-                     //remaining code
-                     handleAddNote(data)
-                  }
-               }}
-            />
-         </PopupContainer> */}
+			</Container>
 		</section >
 	)
 }

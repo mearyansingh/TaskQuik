@@ -2,7 +2,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from 'react-toastify';
 import { Container } from "react-bootstrap";
-import './App.css'
 import Register from './Pages/Register'
 import Login from './Pages/Login'
 import Header from './Components/LayoutComponents/Header';

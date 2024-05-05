@@ -1,0 +1,62 @@
+[data-bs-theme=dark] {
+   color-scheme: dark;
+
+   --bs-black: #fff;
+   --bs-white: #000;
+   --bs-gray: #6c757d;
+   --bs-gray-dark: #11263c;
+   --bs-gray-900: #fff;
+   --bs-gray-800: #e5ecf2;
+   --bs-gray-700: #e9ecef;
+   --bs-gray-600: #dee2e6;
+   --bs-gray-500: #bac0c4;
+   --bs-gray-400: #adb5bd;
+   --bs-gray-300: #6c757d;
+   --bs-gray-200: #495057;
+   --bs-gray-100: #11263c;
+   --bs-light: #293145;
+   --bs-dark: #11263c;
+   --bs-default: #293145;
+   --bs-primary-rgb: 102, 16, 242;
+   --bs-secondary-rgb: 255, 122, 79;
+   --bs-success-rgb: 13, 196, 154;
+   --bs-info-rgb: 0, 208, 255;
+   --bs-warning-rgb: 255, 193, 7;
+   --bs-danger-rgb: 235, 87, 87;
+   --bs-light-rgb: 41, 49, 69;
+   --bs-dark-rgb: 255, 255, 255;
+   --bs-default-rgb: 204, 219, 229;
+   --bs-white-rgb: 0, 0, 0;
+   --bs-black-rgb: 255, 255, 255;
+   --bs-body-bg: #000;
+
+   //tooltip style
+   .tooltip {
+      --bs-tooltip-bg: #7f7f7f66;
+      --bs-tooltip-color: --bs-gray-300;
+   }
+
+   //dropdown
+   .dropdown-menu {
+      --bs-dropdown-link-hover-bg: #11171c;
+      --bs-dropdown-link-color: $white;
+      --bs-dropdown-link-hover-color: $white;
+      --bs-dropdown-link-active-bg: #6260d6;
+      --bs-dropdown-link-active-color: $white;
+   }
+
+   //forms
+   .form-control,
+   .form-select,
+   .custom-upload__label {
+      border-color: var(--bs-border-color-translucent);
+   }
+
+   .form-label {
+      color: var(--bs-body-color);
+   }
+
+   .modal-backdrop {
+      --bs-backdrop-opacity: 0.7;
+   }
+}

@@ -1,39 +1,37 @@
-import { Button, Card, Col, Container, Image, Row } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { Button, Col, Image, Row } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import taskManageImg from '../assets/images/task-manage.jpg'
 
 function Home() {
 
+	const navigate = useNavigate()
+
 	return (
-		<section className="p-3 p-md-4 p-xl-5">
-			<Container>
-				<Row className="justify-content-center">
-					<Col sm={12} xxl={11}>
-						<Card className="border-light-subtle shadow-sm">
-							<Row className="g-0">
-								<Col sm={12} md={6}>
-									<Image fluid className="rounded-start w-100 h-100 object-fit-cover" src="https://images.unsplash.com/photo-1611223235982-891064f27716?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="In lifting others we rise." />
-								</Col>
-								<Col sm={12} md={6} className="d-flex align-items-center justify-content-center">
-									<Card.Body className="p-3 p-md-4 p-xl-5 w-100">
-										<div className="mb-5">
-											<div className="text-center mb-4">
-												<span className='fw-bold'>TaskQuik</span>
-											</div>
-											<h2 className="h4 text-center">Want to stay organized?</h2>
-											<h3 className="fs-6 fw-normal text-secondary text-center m-0">Please choose from an option below</h3>
-										</div>
-										<div className="d-grid gap-3 ">
-											<Button as={Link} to='/create-task' size="lg" variant='dark' type="button">Create New Task</Button>
-											<Button as={Link} to='/tasks' size="lg" type="button">View Tasks</Button>
-										</div>
-									</Card.Body>
-								</Col>
-							</Row>
-						</Card>
+		<>
+			<Col className="py-5">
+				<Row className="flex-lg-row-reverse align-items-center g-5">
+					<Col sm={8} lg={6} className="col-10">
+						<Image
+							fluid
+							src={taskManageImg}
+							className="d-block mx-lg-auto img-fluid"
+							alt="hero-img"
+							width="700"
+							height="500"
+							loading="lazy"
+						/>
+					</Col>
+					<Col className="col-lg-6">
+						<h1 className="display-5 fw-bold text-body-emphasis lh-1 mb-3">TaskQuik - Streamline Your Tasks, Boost Your Productivity!</h1>
+						<p className="lead">TaskQuik is your ultimate task management companion designed to simplify your workflow and supercharge your productivity. With TaskQuik, you can effortlessly organize your tasks and stay on top of your deadlines. Say goodbye to chaos and hello to efficiency with TaskQuik's intuitive interface, powerful features, and seamless integration. Whether you're a busy professional, a student with deadlines, or a team leader managing projects, TaskQuik has everything you need to conquer your tasks and achieve your goals. Try TaskQuik today and experience the difference!</p>
+						<div className="d-grid gap-2 d-md-flex justify-content-md-start">
+							<Button as={Link} to='/create-task' type="button" className="btn-lg px-4 me-md-2" size="lg">Create New Task</Button>
+							<Button onClick={() => navigate('/tasks')} type="button" variant='outline-secondary' className="px-4" size="lg">My Tasks</Button>
+						</div>
 					</Col>
 				</Row>
-			</Container>
-		</section >
+			</Col>
+		</>
 	)
 }
 

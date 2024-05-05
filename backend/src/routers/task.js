@@ -23,7 +23,20 @@ router.post('/', auth, async (req, res) => {
 //Get /tasks?completed=true
 //Get /tasks?limit=10&skip=20
 //Get /tasks?sortBy=createdAt:desc
-// router.get('/tasks', auth, async (req, res) => {
+/**
+ * Get tasks
+ * @route GET /tasks
+ * @group Task - Operations about tasks
+ * @param {number} limit.query.required - limit the number of tasks to be returned
+ * @param {number} skip.query.required - number of tasks to skip
+ * @param {string} sortBy.query.required - sort tasks by the given field
+ * @param {boolean} completed.query - filter tasks by completed status
+ * @param {string} search.query - search tasks by description
+ * @security Bearer
+ * @response {Task[]} 200 - array of tasks
+ * @response {Error} 400 - bad request
+ * @response {Error} 500 - internal server error
+ */
 router.get('/', auth, async (req, res) => {
 
 	const match = {}
@@ -39,7 +52,6 @@ router.get('/', auth, async (req, res) => {
 	}
 
 	try {
-		// const task = await Task.find({ owner: req.user._id })
 		await req.user.populate({
 			path: "tasks",
 			match,
@@ -49,19 +61,11 @@ router.get('/', auth, async (req, res) => {
 				sort
 			},
 		})
-		res.send(req.user.tasks)
 
-		//second way
-		// await req.user.populate("tasks")
-		// res.send(req.user.tasks)
+		res.send(req.user.tasks)
 	} catch (error) {
 		res.status(500).res.send(error)
 	}
-	// Task.find({}).then((task) => {
-	//    res.send(task)
-	// }).catch((error) => {
-	//    res.status(500).res.send(error)
-	// })
 })
 
 //GET SINGLE TASK
@@ -84,8 +88,10 @@ router.get('/:id', auth, async (req, res) => {
 
 //UPDATE TASK
 //Debug->404
-router.patch('/tasks/:id', auth, async (req, res) => {
+router.patch('/:id', auth, async (req, res) => {
+
 	const updates = Object.keys(req.body)
+	console.log(updates, "updates")
 	const allowedUpdates = ["description", "completed"]
 	const isValidOperation = updates.every((update) => allowedUpdates.includes(update))
 

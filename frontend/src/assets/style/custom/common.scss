@@ -1,0 +1,25 @@
+html {
+   scroll-snap-type: y mandatory;
+   scroll-behavior: smooth;
+}
+
+.icon-hover {
+   --bs-icon-link-transform: translate3d(0, -.125rem, 0)
+}
+
+html,
+body {
+   // font-family: 'Montserrat', sans-serif !important;
+   overflow-y: auto;
+   overflow-x: hidden;
+   height: 100%;
+   /* @extend .app-scrollbar; */
+}
+
+.border-dashed {
+   border-style: dotted;
+}
+
+.cursor-pointer {
+   cursor: pointer;
+}

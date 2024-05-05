@@ -9,7 +9,6 @@ import { Loader } from '../Components/GlobalComponents'
 
 function CreateTask() {
 
-
 	const { isLoading, isError, isSuccess, message } = useSelector(state => state.tasks)
 
 	const dispatch = useDispatch()
@@ -24,20 +23,22 @@ function CreateTask() {
 		if (isError) {
 			toast.error(message)
 		}
-		//Redirect when submit the ticket without error
-		// if (isSuccess) {
-		// 	// dispatch(reset())
-		// 	// toast.success('Task created successfully')
-		// 	navigate('/tasks')
-		// }
-		//Reset all the fields 
-		dispatch(reset())
-	}, [isError, isSuccess, message, navigate, dispatch])
+		return () => {
+			if (isSuccess) {
+				dispatch(reset())
+			}
+		}
+	}, [isError, message, dispatch, isSuccess])
 
-	function onHandleSubmit(e) {
+
+	const onSubmitTask = async (e) => {
 		e.preventDefault()
-		console.log(description, completed)
-		dispatch(createTask({ description, completed }))
+		try {
+			await dispatch(createTask({ description, completed }));
+			navigate('/tasks');
+		} catch (error) {
+			toast.error('Failed to create task. Please try again later.');
+		}
 	}
 
 	return (
@@ -54,7 +55,7 @@ function CreateTask() {
 							</Button>
 							<h1 className='text-center'>Create new task</h1>
 							<p className='text-center'>Please fill out the form below</p>
-							<Form onSubmit={onHandleSubmit}>
+							<Form>
 								<Form.Group className="mb-3" controlId="description">
 									<Form.Label>Description</Form.Label>
 									<Form.Control as="textarea" required rows={3} placeholder="Enter description" value={description} onChange={(e) => setDescription(e.target.value)} />
@@ -77,7 +78,7 @@ function CreateTask() {
 									checked={!completed}
 									onChange={() => setCompleted(!completed)}
 								/>
-								<Button type='submit' className="mx-auto d-block">Submit</Button>
+								<Button type='button' onClick={(e) => onSubmitTask(e)} className="mx-auto d-block">Submit</Button>
 							</Form>
 						</Card.Body>
 					</Card>

@@ -6,11 +6,14 @@
  * description:: prop for showing the description.
  */
 import { PropTypes } from "prop-types";
+import { Image } from "react-bootstrap";
+import noDataImg from '../../../assets/images/no-data.jpg'
 
-function ListEmptyPlaceholder({ message, description, wrapperClass, contentWrapperClass, messageClass }) {
+function ListEmptyPlaceholder({ message, description, wrapperClass, contentWrapperClass = "w-40 mx-auto", messageClass }) {
 	return (
 		<div className={`border-light-subtle border-4 border-dashed text-center py-5 py-sm-100 ${wrapperClass ? wrapperClass : ""}`}>
 			<div className={`${contentWrapperClass ? contentWrapperClass : ""}`}>
+				<Image fluid alt="no-data-img" src={noDataImg} width={100} height={100} />
 				<i className="display-6 d-block mb-4 text-danger opacity-50 lh-1 bi bi bi-x-circle"></i>
 				{message && message !== "" && <h5 className={`${messageClass} mb-0`}>{message}</h5>}
 				{description && description !== "" && <p className="mb-0 fs-14 mt-3">{description}</p>}
@@ -19,14 +22,6 @@ function ListEmptyPlaceholder({ message, description, wrapperClass, contentWrapp
 	)
 }
 
-/** Default props values */
-ListEmptyPlaceholder.defaultProps = {
-	description: "",
-	message: "",
-	wrapperClass: "",
-	contentWrapperClass: "w-40 mx-auto",
-	messageClass: ""
-};
 
 /** Props types */
 ListEmptyPlaceholder.propTypes = {
