@@ -7,3 +7,4 @@ export { Tooltip } from "./Tooltip";
 export { PopupContainer } from "./Popups/PopupContainer";
 export { ConfirmPopup } from "./Popups/ConfirmPopup";
 export { UpdateTaskPopup } from "./Popups/UpdateTaskPopup";
+export { ViewTaskPopup } from "./Popups/ViewTaskPopup";

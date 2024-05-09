@@ -58,7 +58,6 @@ export const getUserProfile = createAsyncThunk(
 	'auth/getUserProfile',
 	async (_, thunkAPI) => {
 		try {
-			// console.log(thunkAPI.getState().auth.user.token, "lll")
 			const token = thunkAPI.getState().auth.user.token//we can get token from auth slice using thunkAPI
 			return await authService.getUserProfile(token)
 		} catch (error) {
@@ -73,8 +72,6 @@ export const deleteUserProfile = createAsyncThunk(
 	'auth/deleteProfile',
 	async (userId, thunkAPI) => {
 		try {
-			// console.log(userId, "userId");
-			// console.log(thunkAPI.getState().auth.user.token, "lll")
 			const token = thunkAPI.getState().auth.user.token//we can get token from auth slice using thunkAPI
 			const response = await authService.deleteUserProfile(userId, token)
 			// Dispatch toaster message upon successful deletion

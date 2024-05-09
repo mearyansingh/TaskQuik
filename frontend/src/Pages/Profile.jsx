@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import { Link, useNavigate } from 'react-router-dom'
-import { Button, Card, Container, Image } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom'
+import { Button, Card, Image } from 'react-bootstrap'
 import { deleteUserProfile, getUserProfile, reset } from '../features/auth/authSlice'
-import { ListEmptyPlaceholder, Loader } from '../Components/GlobalComponents'
+import { ConfirmPopup, ListEmptyPlaceholder, Loader, PopupContainer } from '../Components/GlobalComponents'
+import UserAvatar from '../assets/images/avatar.png';
 
 function Profile() {
 
-	const { user, isLoading, isError, message } = useSelector(state => state.auth)
+	const { user, isLoading, isError, message } = useSelector(state => state.auth);
 
-	const dispatch = useDispatch()
-	const navigate = useNavigate()
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const _deleteAccountPopup = useRef(null)
 
 	useEffect(() => {
 		dispatch(getUserProfile())
@@ -19,9 +21,9 @@ function Profile() {
 	}, [dispatch])
 
 	// Update onDeleteUserProfile function
-	const onDeleteUserProfile = async () => {
+	const onDeleteUserProfile = async (accId) => {
 		try {
-			await dispatch(deleteUserProfile(user?.user?._id));
+			await dispatch(deleteUserProfile(accId));
 			navigate('/register');
 		} catch (error) {
 			// Handle any errors here, if necessary
@@ -44,8 +46,8 @@ function Profile() {
 									<div className="flex-shrink-0">
 										<Image
 											fluid
-											src="https://github.com/mdo.png"
-											alt="profile_img"
+											src={UserAvatar}
+											alt="User avatar"
 											width={80}
 											height={80}
 											className='rounded-circle'
@@ -54,8 +56,9 @@ function Profile() {
 									<div className="flex-grow-1">
 										<Card.Title className='fw-semibold text-capitalize text-center text-sm-start '>{user.user.name}</Card.Title>
 										<Card.Subtitle className='text-center text-sm-start '>{user.user.email}</Card.Subtitle>
-										{/* <Card.Text className='text-center text-sm-start mt-1'>{user.user.age}</Card.Text> */}
-										<Button onClick={onDeleteUserProfile} variant="danger" className='mt-2'><i className='bi bi-trash' />
+										{/* onClick={onDeleteUserProfile} */}
+										<Button variant="danger" className='mt-2' onClick={() => _deleteAccountPopup.current.showModal(user?.user?._id)}>
+											<i className='bi bi-trash me-1' />
 											{isLoading ? <>Account Deleting...</> : <>Delete Account</>}
 										</Button>
 									</div>
@@ -68,23 +71,26 @@ function Profile() {
 				</>
 			}
 			{/* </Container > */}
-			{/* <PopupContainer
-				ref={_addNotePopup}
-				title="Add Note"
-				subTitle="this is subtitle"
+			<PopupContainer
+				ref={_deleteAccountPopup}
 				dialogClassName="custom-popup--sm modal-dialog-sm-end"
-				isHeader={true}
+				isHeader={false}
 			>
-				<AddNotePopup
+				<ConfirmPopup
+					popupRef={_deleteAccountPopup}
+					title="Delete Account"
+					message="Are you sure you want to delete this account?"
+					submitBtnText='Delete'
 					callback={(status, data) => {
-						_addNotePopup.current.closeModal();
+						_deleteAccountPopup.current.closeModal();
 						if (status && data) {
-							//remaining code
-							handleAddNote(data)
+							// remaining code
+							console.log(data, "kk")
+							onDeleteUserProfile(data)
 						}
 					}}
 				/>
-			</PopupContainer> */}
+			</PopupContainer>
 		</section >
 	)
 }

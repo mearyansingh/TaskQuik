@@ -74,27 +74,8 @@ router.post('/logoutAll', auth, async (req, res) => {
 // It utilizes the auth middleware to authenticate the user before sending back the user data.
 // router.get('/users/me', auth, async (req, res) => {
 router.get('/me', auth, async (req, res) => {
-	// console.log("ll")
 	res.send(req.user)
-
 })
-
-//Getting single users(Debug)
-// router.get("/users/:id", async (req, res) => {
-//    const _id = req.params.id
-
-//    try {
-//       const user = await User.findById(_id)
-//       console.log("user");
-//       if (!user) {
-//          // console.log("shdhash")
-//          return res.status(404).send()
-//       }
-//       res.send(user)
-//    } catch (error) {
-//       res.status(500).send()
-//    }
-// })
 
 //Debug->404
 // A PATCH route at ('/users/me') endpoint is defined for updating the user's profile.

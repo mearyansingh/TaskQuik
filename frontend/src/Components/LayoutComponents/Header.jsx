@@ -8,6 +8,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout, reset } from '../../features/auth/authSlice'
 import { useTheme } from '../../Context/ThemeContext';
+import UserAvatar from '../../assets/images/avatar.png'
 
 function Header() {
 
@@ -22,7 +23,6 @@ function Header() {
 
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-
 
 	/**Handle theme change */
 	const handleThemeChange = (newTheme) => {
@@ -66,7 +66,7 @@ function Header() {
 						<>
 							<Dropdown>
 								<Dropdown.Toggle id="dropdown-basic" className="p-0 d-flex align-items-center text-dark text-decoration-none bg-transparent border-0">
-									<Image fluid src="https://github.com/mdo.png" alt="user-avatar" width="32" height="32" className="rounded-circle me-2" />
+									<Image fluid src={user?.user?.image ? user?.user?.image : UserAvatar} alt="User avatar" width="32" height="32" className="rounded-circle me-2" />
 									<span className='fw-semibold text-capitalize'>{user?.user?.name}</span>
 								</Dropdown.Toggle>
 								<Dropdown.Menu>
@@ -78,8 +78,14 @@ function Header() {
 						</>
 					) : (
 						<>
-							<Nav.Link as={Link} to="/login" className='fw-semibold'><i className="bi bi-box-arrow-in-right me-1"></i>Login</Nav.Link>
-							<Nav.Link as={Link} to="/register" className='fw-semibold'><i className="bi bi-person-fill me-1"></i>Register</Nav.Link>
+							<Nav.Link as={Link} to="/login" className='fw-semibold'>
+								<i className="bi bi-box-arrow-in-right me-1 d-none d-md-inline-block" />
+								Login
+							</Nav.Link>
+							<Nav.Link as={Link} to="/register" className='fw-semibold'>
+								<i className="bi bi-person-fill me-1 d-none d-md-inline-block" />
+								Register
+							</Nav.Link>
 						</>
 					)}
 					<Nav as="ul" variant="pills" className="rounded-2 bg-primary-subtle p-1 flex-row" activeKey={themeTab} onSelect={(eventKey) => handleThemeChange(eventKey)}>
@@ -89,7 +95,7 @@ function Header() {
 							</Nav.Link>
 						</Nav.Item>
 						<Nav.Item className="flex-grow-1 lh-1" as="li">
-							<Nav.Link eventKey="dark" className={` text-center py-2 px-3 ${theme === 'dark' ? 'bg-light' : 'text-primary-emphasis'}`}>
+							<Nav.Link eventKey="dark" className={`text-center py-2 px-3 ${theme === 'dark' ? 'bg-light' : 'text-primary-emphasis'}`}>
 								<i className="bi bi-moon-fill"></i>
 							</Nav.Link>
 						</Nav.Item>

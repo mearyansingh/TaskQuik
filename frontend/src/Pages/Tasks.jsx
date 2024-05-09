@@ -1,12 +1,16 @@
+/**
+ * Tasks component that fetches tasks from the backend and displays them in a list.
+ * It also provides functionality to sort, filter, and paginate tasks.
+ */
 import { useEffect, useRef, useState } from 'react'
-import { Badge, Button, ListGroup, Pagination, Dropdown, Form } from 'react-bootstrap';
+import { Badge, Button, ListGroup, Pagination, Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { reset } from '../features/auth/authSlice';
 import { deleteTask, getTasks, updateTask } from '../features/tasks/taskSlice';
 import { ListEmptyPlaceholder } from '../Components/GlobalComponents';
-import { UpdateTaskPopup, ConfirmPopup, PopupContainer, Tooltip } from '../Components/GlobalComponents';
+import { UpdateTaskPopup, ConfirmPopup, PopupContainer, Tooltip, ViewTaskPopup } from '../Components/GlobalComponents';
 
 function Tasks() {
 
@@ -21,10 +25,12 @@ function Tasks() {
 	const [completed, setCompleted] = useState(null);
 	const [page, setPage] = useState(1);
 	const [pageSize, setPageSize] = useState(10);
+	const totalPages = Math.ceil(tasks.length / pageSize);
 
 	/**Stateless variable */
 	const _updateTaskPopup = useRef(null)
 	const _deleteTaskPopup = useRef(null)
+	const _viewTaskPopup = useRef(null)
 
 	/**Lifecycle method */
 	// useEffect(() => {
@@ -66,7 +72,6 @@ function Tasks() {
 	}
 
 	const onHandleDelete = async (taskId) => {
-		// dispatch(deleteTask(taskId))
 		try {
 			await dispatch(deleteTask(taskId));
 			navigate('/tasks');
@@ -79,7 +84,7 @@ function Tasks() {
 
 	return (
 		<>
-			<section className="p-3 p-md-4 p-xl-5">
+			<section className="py-3 py-md-4 py-xl-5">
 				<div className="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
 					<div className="form-floating">
 						<Form.Select className="form-select" id="floatingSelect" value={sortBy} onChange={(e) => setSortBy(e.target.value)} aria-label="Floating label select example">
@@ -111,13 +116,13 @@ function Tasks() {
 									</div>
 									<div className='mt-3 mt-md-0 hstack gap-2'>
 										<Tooltip content="View task">
-											<Button as={Link} to={`/task/${task._id}`} variant='link' className='border text-body-tertiary'><i className="bi bi-eye" /></Button>
+											<Button variant='link' className='border text-body-tertiary' onClick={() => _viewTaskPopup.current.showModal({ task })}><i className="bi bi-eye" /></Button>
 										</Tooltip>
 										<Tooltip content="Update task">
 											<Button variant='link' className='border text-body-tertiary' onClick={() => _updateTaskPopup.current.showModal({ task })}><i className='bi bi-pencil' /></Button>
 										</Tooltip>
 										<Tooltip content="Delete task">
-											<Button variant='link' className='border' onClick={() => _deleteTaskPopup.current.showModal({ task })}><i className=' text-danger bi bi-trash' /></Button>
+											<Button variant='link' className='border' onClick={() => _deleteTaskPopup.current.showModal(task._id)}><i className=' text-danger bi bi-trash' /></Button>
 										</Tooltip>
 									</div>
 								</ListGroup.Item>
@@ -127,15 +132,22 @@ function Tasks() {
 					:
 					<ListEmptyPlaceholder message="Currently there is no tasks." />
 				}
-				<Pagination className="mt-3">
-					<Pagination.Prev onClick={() => handlePageChange(page - 1)} disabled={page === 1} />
-					<Pagination.Next onClick={() => handlePageChange(page + 1)} disabled={tasks.length < pageSize} />
-				</Pagination>
+
+				{tasks?.length > 0 && (tasks?.length >= pageSize) &&
+					<Pagination className="mt-3">
+						<Pagination.Prev onClick={() => handlePageChange(page - 1)} disabled={page === 1} >
+							Previous
+						</Pagination.Prev>
+						<Pagination.Next onClick={() => handlePageChange(page + 1)} disabled={tasks.length < pageSize} >
+							Next
+						</Pagination.Next>
+					</Pagination>
+				}
 			</section >
 			<PopupContainer
 				ref={_updateTaskPopup}
 				title="Update Task"
-				subTitle="This is subtitle"
+				subTitle="Fill the details to update the task."
 				dialogClassName="custom-popup--sm modal-dialog-sm-end"
 				isHeader={true}
 			>
@@ -152,15 +164,14 @@ function Tasks() {
 			</PopupContainer>
 			<PopupContainer
 				ref={_deleteTaskPopup}
-
 				dialogClassName="custom-popup--sm modal-dialog-sm-end"
 				isHeader={false}
 			>
 				<ConfirmPopup
 					popupRef={_deleteTaskPopup}
-					title="Are you sure you want to delete this task?"
-					message="This is subtitle"
-					// description="This is subtitle"
+					title='Delete task'
+					message="Are you sure you want to delete this task?"
+					submitBtnText="Delete"
 					callback={(status, data) => {
 						_deleteTaskPopup.current.closeModal();
 						if (status && data) {
@@ -170,8 +181,21 @@ function Tasks() {
 					}}
 				/>
 			</PopupContainer>
+			<PopupContainer
+				ref={_viewTaskPopup}
+				title="Update task"
+				subTitle="Fill the details to update the task. "
+				dialogClassName="custom-popup--sm modal-dialog-sm-end"
+				isHeader={false}
+			>
+				<ViewTaskPopup
+					popupRef={_viewTaskPopup}
+					callback={() => {
+						_viewTaskPopup.current.closeModal();
+					}}
+				/>
+			</PopupContainer>
 		</>
-
 	)
 }
 

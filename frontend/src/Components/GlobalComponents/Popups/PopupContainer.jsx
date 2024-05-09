@@ -58,7 +58,7 @@ function PopupContainerComponent({ size, children, title, dialogClassName = 'cus
          {...rest}
       >
          {isHeader &&
-            <Modal.Header closeButton className={`${title && title !== '' ? "custom-popup__header" : ""}`}>
+            <Modal.Header closeButton className={`${title && title !== '' ? "custom-popup__header border-bottom-0" : ""}`}>
                <div>
                   {title && title !== '' && <Modal.Title className={titleClass}>{title}</Modal.Title>}
                   {subTitle && subTitle !== '' && <small>{subTitle}</small>}

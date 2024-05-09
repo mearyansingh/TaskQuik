@@ -4,7 +4,7 @@ const API_URL = '/api/users'
 
 //Register user
 const register = async (userData) => {
-	// console.log(userData, "userData")
+
 	const response = await axios.post(`${import.meta.env.VITE_BASEURL}${API_URL}`, userData)
 	if (response) {
 		localStorage.setItem('user', JSON.stringify(response.data))//local storage can only hold string
@@ -49,16 +49,6 @@ const logout = async (token) => {
 //Get user Profile
 const getUserProfile = async (token) => {
 
-	// const user = JSON.parse(localStorage.getItem('user'));
-	// console.log(user, "user")
-
-
-	// if (!user || !user.token) {
-	//    throw new Error('Token not found');
-	// }
-	// if
-
-	// console.log(token, "token")
 	try {
 		const config = {
 			headers: {
@@ -67,7 +57,6 @@ const getUserProfile = async (token) => {
 		}
 
 		const response = await axios.get(`${import.meta.env.VITE_BASEURL}${API_URL}/me`, config)
-		// console.log(response, "repo")
 		return response.data
 	} catch (error) {
 		throw new Error(error.response?.data?.message || error.message);

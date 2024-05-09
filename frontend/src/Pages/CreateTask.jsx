@@ -1,5 +1,8 @@
+/**
+ * This component creates a new task.
+ */
 import { useEffect, useState } from 'react'
-import { Form, Button, Card, Container } from 'react-bootstrap'
+import { Form, Button, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -30,7 +33,7 @@ function CreateTask() {
 		}
 	}, [isError, message, dispatch, isSuccess])
 
-
+	/**function to submit the form */
 	const onSubmitTask = async (e) => {
 		e.preventDefault()
 		try {
@@ -42,48 +45,46 @@ function CreateTask() {
 	}
 
 	return (
-		<section className="p-3 p-md-4 p-xl-5">
-			<Container>
-				{isLoading ?
-					<Loader />
-					:
-					<Card className='border-light-subtle shadow-sm'>
-						<Card.Body className='p-3 p-md-4 p-xl-5'>
-							<Button as={Link} to='/' variant="link" className="icon-link icon-link-hover d-inline-flex align-items-center lh-1 text-decoration-none gap-1 text-dark fw-semibold p-0 mb-3 mb-md-0">
-								<i className='bi bi-arrow-left'></i>
-								Back
-							</Button>
-							<h1 className='text-center'>Create new task</h1>
-							<p className='text-center'>Please fill out the form below</p>
-							<Form>
-								<Form.Group className="mb-3" controlId="description">
-									<Form.Label>Description</Form.Label>
-									<Form.Control as="textarea" required rows={3} placeholder="Enter description" value={description} onChange={(e) => setDescription(e.target.value)} />
-								</Form.Group>
-								<Form.Check
-									type="radio"
-									name="completionStatus"
-									label="Complete"
-									id="complete"
-									value="complete"
-									checked={completed}
-									onChange={() => setCompleted(!completed)}
-								/>
-								<Form.Check
-									type="radio"
-									name="completionStatus"
-									label="Incomplete"
-									id="incomplete"
-									value="incomplete"
-									checked={!completed}
-									onChange={() => setCompleted(!completed)}
-								/>
-								<Button type='button' onClick={(e) => onSubmitTask(e)} className="mx-auto d-block">Submit</Button>
-							</Form>
-						</Card.Body>
-					</Card>
-				}
-			</Container>
+		<section className="py-3 py-md-4 py-xl-5">
+			{isLoading ?
+				<Loader />
+				:
+				<Card className='border-light-subtle shadow-sm'>
+					<Card.Body className='p-3 p-md-4 p-xl-5'>
+						<Button as={Link} to='/' variant="link" className="icon-link icon-link-hover d-inline-flex align-items-center lh-1 text-decoration-none gap-1 text-dark fw-semibold p-0 mb-3 mb-md-0">
+							<i className='bi bi-arrow-left'></i>
+							Back
+						</Button>
+						<h1 className='text-center'>Create new task</h1>
+						<p className='text-center'>Please fill out the form below</p>
+						<Form>
+							<Form.Group className="mb-3" controlId="description">
+								<Form.Label>Description</Form.Label>
+								<Form.Control as="textarea" required rows={3} placeholder="Enter description" value={description} onChange={(e) => setDescription(e.target.value)} />
+							</Form.Group>
+							<Form.Check
+								type="radio"
+								name="completionStatus"
+								label="Complete"
+								id="complete"
+								value="complete"
+								checked={completed}
+								onChange={() => setCompleted(!completed)}
+							/>
+							<Form.Check
+								type="radio"
+								name="completionStatus"
+								label="Incomplete"
+								id="incomplete"
+								value="incomplete"
+								checked={!completed}
+								onChange={() => setCompleted(!completed)}
+							/>
+							<Button type='button' onClick={(e) => onSubmitTask(e)} className="mx-auto d-block mt-4">Submit</Button>
+						</Form>
+					</Card.Body>
+				</Card>
+			}
 		</section>
 	)
 }

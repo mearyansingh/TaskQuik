@@ -12,10 +12,9 @@ function Footer() {
                </Link>
                <small className="mb-3 mb-md-0 text-body-secondary">© 2024 Made with ❤️ by <a href='https://devaryan.online' target='_blank'>Dev Aryan</a></small>
             </Col>
-            <ul className="nav col-md-4 d-flex justify-content-end list-unstyled">
-               <li><a className="text-body-secondary" href="https://facebook.com/iaryansingh.me" rel="noreferrer" target='_blank'><i className='bi bi-facebook'></i></a></li>
-               <li className="ms-3"><a className="text-body-secondary" href="https://instagram.com/aryansingh.me" rel="noreferrer" target='_blank'><i className='bi bi-instagram'></i></a></li>
-               <li className="ms-3"><a className="text-body-secondary" href="https://twitter.com/aryansingh_1810" rel="noreferrer" target='_blank'><i className='bi bi-twitter'></i></a></li>
+            <ul className="nav col-md-4 d-flex gap-3 justify-content-end list-unstyled">
+               <li className=""><a className="text-body-secondary" href="https://instagram.com/devaryan.online" rel="noreferrer" target='_blank'><i className='bi bi-instagram'></i></a></li>
+               <li className=""><a className="text-body-secondary" href="https://github.com/mearyansingh" rel="noreferrer" target='_blank'><i className='bi bi-github'></i></a></li>
             </ul>
          </footer>
       </Container>

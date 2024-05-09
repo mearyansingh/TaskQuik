@@ -41,3 +41,14 @@ $tooltip-bdr-rds: 4px;
 $tooltip-arrow-before-bdr-color: $border-color;
 $tooltip-arrow-after-bdr-color: $white;
 $tooltip-arrow-dark-bdr-color: #2b4d66;
+
+/* ========= Popups variables ========== */
+$tjs-popup-header-bg: $body-bg;
+$tjs-popup-header-padding: 0.9375rem 1.5625rem 0.625rem 1.5625rem;
+$tjs-popup-content-bg: $modal-content-bg;
+$tjs-popup-content-padding: 1.25rem 1.5625rem;
+$tjs-popup-footer-bg: $body-bg;
+$tjs-popup-footer-padding: 0.9375rem 1.5625rem;
+$tjs-popup-footer-top-bdr: 2px solid $gray-100;
+$tjs-popup-title-spacing: 1.25rem 1.875rem;
+$tjs-popup-border-radius: 3px;

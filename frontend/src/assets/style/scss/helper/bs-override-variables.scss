@@ -1417,8 +1417,8 @@ $accordion-button-active-icon: url("data:image/svg+xml,<svg xmlns='http://www.w3
 // scss-docs-start tooltip-variables
 $tooltip-font-size: $font-size-sm !default;
 $tooltip-max-width: 200px !default;
-$tooltip-color: var(--#{$prefix}body-bg) !default;
-$tooltip-bg: var(--#{$prefix}emphasis-color) !default;
+$tooltip-color: var(--#{$prefix}gray-900) !default;
+$tooltip-bg: var(--#{$prefix}white) !default;
 $tooltip-border-radius: var(--#{$prefix}border-radius) !default;
 $tooltip-opacity: .9 !default;
 $tooltip-padding-y: $spacer * .25 !default;
@@ -1543,10 +1543,15 @@ $modal-footer-bg: null !default;
 $modal-footer-border-color: $modal-header-border-color !default;
 $modal-footer-border-width: $modal-header-border-width !default;
 
-$modal-sm: 300px !default;
-$modal-md: 500px !default;
-$modal-lg: 800px !default;
-$modal-xl: 1140px !default;
+// $modal-sm: 300px !default;
+// $modal-md: 500px !default;
+// $modal-lg: 800px !default;
+// $modal-xl: 1140px !default;
+
+$modal-sm: 500px !default;
+$modal-md: 900px !default;
+$modal-lg: 1040px !default;
+$modal-xl: 1250px !default;
 
 $modal-fade-transform: translate(0, -50px) !default;
 $modal-show-transform: none !default;

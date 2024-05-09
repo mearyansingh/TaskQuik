@@ -1,6 +1,6 @@
 import { Button, Col, Image, Row } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import taskManageImg from '../assets/images/task-manage.jpg'
+import taskManageImg from '../assets/images/task-manage.png'
 
 function Home() {
 

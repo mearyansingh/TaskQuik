@@ -13,6 +13,7 @@ function Login() {
 		email: '',
 		password: '',
 	})
+	const [showPassword, setShowPassword] = useState(false);
 
 	//Destructure
 	const { email, password } = formData
@@ -87,15 +88,24 @@ function Login() {
 										</Col>
 										<Col sm={12}>
 											<Form.Label htmlFor='password'>Password<span className="text-danger">*</span></Form.Label>
-											<Form.Control
-												id="password"
-												name="password"
-												type="password"
-												placeholder="Enter password"
-												required
-												value={password}
-												onChange={onHandleChange}
-											/>
+											<div className="position-relative">
+												<Form.Control
+													id="password"
+													name="password"
+													// type="password"
+													type={showPassword ? 'text' : 'password'}
+													placeholder="Enter password"
+													required
+													value={password}
+													onChange={onHandleChange}
+												/>
+												{password !== "" &&
+													<span
+														className={`position-absolute end-0 top-50 translate-middle cursor-pointer lh-1 fs-4 bi  ${showPassword ? 'bi-eye' : 'bi-eye-slash'}`}
+														onClick={() => setShowPassword((prevState) => !prevState)}
+													/>
+												}
+											</div>
 										</Col>
 										<Col sm={12}>
 											<div className="d-grid">

@@ -62,11 +62,11 @@ function UpdateTaskPopup({ popupRef, callback }) {
                />
             </Form>
          </Modal.Body>
-         <Modal.Footer className="custom-popup__footer flex-column-reverse flex-sm-row gap-2 gap-sm-3">
-            <Button variant="dark" type="button" aria-label="Cancel" onClick={() => callback(false)}>
+         <Modal.Footer className="custom-popup__footer flex-column-reverse flex-sm-row gap-2 gap-sm-3 border-top-0">
+            <Button variant="dark" type="button" aria-label="Cancel" size="sm" onClick={() => callback(false)} className="m-0">
                Cancel
             </Button>
-            <Button variant="primary" form="updateTask" type="submit" aria-label="Update Note">
+            <Button variant="primary" form="updateTask" type="submit" size="sm" aria-label="Update Note" className="m-0">
                Update
             </Button>
          </Modal.Footer>

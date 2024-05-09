@@ -1,3 +1,0 @@
-{/* <script>
-   import {useRegisterSW}
-</script> */}

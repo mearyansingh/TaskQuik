@@ -16,7 +16,6 @@ export const createTask = createAsyncThunk(
 	'tasks/create', //action type
 	async (taskData, thunkAPI) => {
 		try {
-			console.log(taskData, "taskData")
 			const token = thunkAPI.getState().auth.user.token//we can get token from auth slice using thunkAPI
 			const response = await taskService.createTask(taskData, token)
 			toast.success('Task created successfully!');
@@ -97,7 +96,6 @@ export const deleteTask = createAsyncThunk(
 	'tasks/deleteTask', //action type
 	async (taskId, thunkAPI) => {
 		try {
-			console.log(taskId, "kk");
 			const token = thunkAPI.getState().auth.user.token//we can get token from auth slice using thunkAPI
 			const response = await taskService.deleteTask(taskId, token)
 			toast.success('Task deleted successfully!');
@@ -148,7 +146,6 @@ const taskSlice = createSlice({
 			.addCase(getTasks.fulfilled, (state, action) => {
 				state.isLoading = false
 				state.isSuccess = true
-				// console.log(action.payload, "ll")
 				state.tasks = action.payload
 			})
 			.addCase(getTasks.rejected, (state, action) => {

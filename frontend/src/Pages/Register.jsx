@@ -15,6 +15,7 @@ function Register() {
 		password: '',
 		confirmPassword: ''
 	})
+	const [showPassword, setShowPassword] = useState(false);
 
 	//Destructure
 	const { name, email, password, confirmPassword } = formData
@@ -106,27 +107,45 @@ function Register() {
 										</Col>
 										<Col sm={12}>
 											<Form.Label htmlFor='password'>Password<span className="text-danger">*</span></Form.Label>
-											<Form.Control
-												id="password"
-												name="password"
-												type="password"
-												placeholder="Enter password"
-												required
-												value={password}
-												onChange={onHandleChange}
-											/>
+											<div className='position-relative'>
+												<Form.Control
+													id="password"
+													name="password"
+													type={showPassword ? 'text' : 'password'}
+													placeholder="Enter password"
+													required
+													value={password}
+													onChange={onHandleChange}
+												/>
+												{password !== "" &&
+													<span
+														className={`position-absolute end-0 top-50 translate-middle cursor-pointer lh-1 fs-4 bi  ${showPassword ? 'bi-eye' : 'bi-eye-slash'}`}
+														onClick={() => setShowPassword((prevState) => !prevState)}
+													/>
+												}
+											</div>
+
 										</Col>
 										<Col sm={12}>
 											<Form.Label htmlFor='confirmPassword'>Confirm Password<span className="text-danger">*</span></Form.Label>
-											<Form.Control
-												id="confirmPassword"
-												name="confirmPassword"
-												type="password"
-												placeholder="Confirm password"
-												required
-												value={confirmPassword}
-												onChange={onHandleChange}
-											/>
+											<div className='position-relative'>
+												<Form.Control
+													id="confirmPassword"
+													name="confirmPassword"
+													// type="password"
+													type={showPassword ? 'text' : 'password'}
+													placeholder="Confirm password"
+													required
+													value={confirmPassword}
+													onChange={onHandleChange}
+												/>
+												{confirmPassword !== "" &&
+													<span
+														className={`position-absolute end-0 top-50 translate-middle cursor-pointer lh-1 fs-4 bi  ${showPassword ? 'bi-eye' : 'bi-eye-slash'}`}
+														onClick={() => setShowPassword((prevState) => !prevState)}
+													/>
+												}
+											</div>
 										</Col>
 										<Col sm={12}>
 											<div className="d-grid">

@@ -20,32 +20,31 @@ export default defineConfig({
 					start_url: '.',
 					scope: '/',
 					display: 'standalone',
-					theme_color: '#3498db',
-					background_color: "#000",
+					theme_color: '##306BFF',
+					background_color: "#cfe2ff",
 					orientation: 'portrait',
 					display_override: ["window-controls-overlay"],
 					icons: [
 						{
-							"src": "/android-chrome-192x192.png",
+							"src": "/maskable_icon_x192.png",
 							"sizes": "192x192",
 							"type": "image/png",
 							"purpose": "any"
 						},
 						{
-							"src": "/android-chrome-192x192.png",
+							"src": "/maskable_icon_x192.png",
 							"sizes": "192x192",
 							"type": "image/png",
 							"purpose": "maskable"
-
 						},
 						{
-							"src": "/android-chrome-512x512.png",
+							"src": "/maskable_icon_x512.png",
 							"sizes": "512x512",
 							"type": "image/png",
 							"purpose": 'any'
 						},
 						{
-							"src": '/android-chrome-512x512.png',
+							"src": '/maskable_icon_x512.png',
 							"sizes": '512x512',
 							"type": 'image/png',
 							"purpose": 'maskable'
@@ -83,21 +82,32 @@ export default defineConfig({
 					],
 					"screenshots": [
 						{
-							"src": "./screenshot-playlist.png",
+							"src": "./desktop-register.png",
 							"sizes": "1280x720",
 							"platform": "wide",
-							"label": "The main PWAmp user interface, showing a list of songs, and playback buttons."
+							"label": "TaskQuick registration - User registration and access options."
 						},
 						{
-							"src": "./screenshot-visualizer.png",
+							"src": "./desktop-home.png",
 							"sizes": "1280x720",
 							"platform": "wide",
-							"label": "The PWAmp visualizer, showing the current song, the playback buttons, and a colorful visualization of the current song."
+							"label": "The main TaskQuick Interface - displaying a crete new task button, all tasks and navigation buttons."
 						},
 						{
-							"src": "./screenshot-widget.png",
+							"src": "./mobile-login.png",
 							"sizes": "600x400",
-							"label": "The PWAmp mini-player widget"
+							"label": "TaskQuick Login - User authentication and access options."
+						},
+						{
+							"src": "./desktop-tasks.png",
+							"sizes": "1280x720",
+							"platform": "wide",
+							"label": "TaskQuick Tasks View - List of tasks, details, and management options."
+						},
+						{
+							"src": "./mobile-createTask.png",
+							"sizes": "600x400",
+							"label": "TaskQuick Create Task - allowing users to input task details and create new tasks."
 						}
 					],
 				},
