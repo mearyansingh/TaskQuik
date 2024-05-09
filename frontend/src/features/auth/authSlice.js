@@ -45,7 +45,24 @@ export const logout = createAsyncThunk(
 	async (_, thunkAPI) => {
 		try {
 			const token = thunkAPI.getState().auth.user.token//we can get token from auth slice using thunkAPI
-			return await authService.logout(token)
+			const response = await authService.logout(token)
+			toast.success('User logout successfully!');
+			return response;
+		} catch (error) {
+			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
+			return thunkAPI.rejectWithValue(message)
+		}
+	}
+)
+//Logout all user
+export const logoutAll = createAsyncThunk(
+	'auth/logoutAll',
+	async (_, thunkAPI) => {
+		try {
+			const token = thunkAPI.getState().auth.user.token//we can get token from auth slice using thunkAPI
+			const response = await authService.logoutAll(token)
+			toast.success('All users logout successfully!');
+			return response;
 		} catch (error) {
 			const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString()
 			return thunkAPI.rejectWithValue(message)
@@ -134,6 +151,20 @@ const authSlice = createSlice({
 				state.user = null
 			})
 			.addCase(logout.rejected, (state, action) => {
+				state.isLoading = false
+				state.isError = true
+				state.message = action.payload
+				state.user = null
+			})
+			.addCase(logoutAll.pending, (state) => {
+				state.isLoading = true
+			})
+			.addCase(logoutAll.fulfilled, (state) => {
+				state.isLoading = false
+				state.isSuccess = true
+				state.user = null
+			})
+			.addCase(logoutAll.rejected, (state, action) => {
 				state.isLoading = false
 				state.isError = true
 				state.message = action.payload

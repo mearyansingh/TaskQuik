@@ -46,6 +46,32 @@ const logout = async (token) => {
 	}
 }
 
+const logoutAll = async (token) => {
+	try {
+		if (!token) {
+			throw new Error('Token not found');
+		}
+
+		const config = {
+			headers: {
+				'Authorization': `Bearer ${token}`
+			}
+		};
+
+		// Perform the logoutAll request
+		const response = await axios.post(`${import.meta.env.VITE_BASEURL}${API_URL}/logoutAll`, null, config);
+
+		// Remove user data from local storage on all devices
+		localStorage.removeItem('user');
+
+		// Return response data
+		return response.data;
+	} catch (error) {
+		// Handle errors gracefully
+		throw new Error(error.response?.data?.message || error.message);
+	}
+};
+
 //Get user Profile
 const getUserProfile = async (token) => {
 
@@ -81,5 +107,5 @@ const deleteUserProfile = async (userId, token) => {
 	}
 }
 
-const authService = { register, login, logout, getUserProfile, deleteUserProfile }
+const authService = { register, login, logout, getUserProfile, deleteUserProfile, logoutAll }
 export default authService

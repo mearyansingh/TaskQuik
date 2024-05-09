@@ -19,13 +19,11 @@ function Tasks() {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-
 	/** Initial state */
 	const [sortBy, setSortBy] = useState('');
 	const [completed, setCompleted] = useState(null);
 	const [page, setPage] = useState(1);
 	const [pageSize, setPageSize] = useState(10);
-	const totalPages = Math.ceil(tasks.length / pageSize);
 
 	/**Stateless variable */
 	const _updateTaskPopup = useRef(null)
@@ -71,6 +69,7 @@ function Tasks() {
 		setPage(page);
 	}
 
+	/** Function to handle delete task **/
 	const onHandleDelete = async (taskId) => {
 		try {
 			await dispatch(deleteTask(taskId));

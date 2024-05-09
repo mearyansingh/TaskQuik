@@ -6,7 +6,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Dropdown, Image } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout, reset } from '../../features/auth/authSlice'
+import { logout, logoutAll, reset } from '../../features/auth/authSlice'
 import { useTheme } from '../../Context/ThemeContext';
 import UserAvatar from '../../assets/images/avatar.png'
 
@@ -35,11 +35,6 @@ function Header() {
 		}
 	};
 
-	/**Function to handle logout  */
-	const onLogout = () => {
-		dispatch(logout());
-	}
-
 	/**Lifecycle method */
 	useEffect(() => {
 
@@ -48,14 +43,34 @@ function Header() {
 		}
 
 		//Redirect when logged out
-		if (isSuccess && !user) {
-			toast.success('User logged out successfully!')
-			navigate('/login'); // Check if this navigates to the "/login" route
-		}
+		// if (isSuccess && !user) {
+		// 	toast.success('User logged out successfully!')
+		// 	navigate('/login'); // Check if this navigates to the "/login" route
+		// }
 
 		//Reset all the fields 
 		dispatch(reset())
 	}, [isError, isSuccess, user, message, navigate, dispatch])
+
+	/**Function to handle logout  */
+	const onLogout = async () => {
+		try {
+			await dispatch(logout());
+			navigate('/login');
+		} catch (error) {
+			console.error('Logout all failed:', error);
+		}
+	}
+
+	/**Function to handle logout all */
+	const onLogoutAll = async () => {
+		try {
+			await dispatch(logoutAll()); // Dispatch the logoutAll action
+			navigate('/login');
+		} catch (error) {
+			console.error('Logout all failed:', error);
+		}
+	};
 
 	return (
 		<Navbar collapseOnSelect expand="lg" className="bg-primary bg-gradient sticky-top">
@@ -72,7 +87,7 @@ function Header() {
 								<Dropdown.Menu>
 									<Dropdown.Item as={Link} to="/profile">Go to profile</Dropdown.Item>
 									<Dropdown.Item onClick={onLogout}>Logout</Dropdown.Item>
-									<Dropdown.Item href="#/action-3">Logout all</Dropdown.Item>
+									<Dropdown.Item onClick={onLogoutAll}>Logout all</Dropdown.Item>
 								</Dropdown.Menu>
 							</Dropdown>
 						</>

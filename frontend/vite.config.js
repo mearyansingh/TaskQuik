@@ -82,16 +82,16 @@ export default defineConfig({
 					],
 					"screenshots": [
 						{
-							"src": "./desktop-register.png",
-							"sizes": "1280x720",
-							"platform": "wide",
-							"label": "TaskQuick registration - User registration and access options."
-						},
-						{
 							"src": "./desktop-home.png",
 							"sizes": "1280x720",
 							"platform": "wide",
 							"label": "The main TaskQuick Interface - displaying a crete new task button, all tasks and navigation buttons."
+						},
+						{
+							"src": "./desktop-register.png",
+							"sizes": "1280x720",
+							"platform": "wide",
+							"label": "TaskQuick registration - User registration and access options."
 						},
 						{
 							"src": "./mobile-login.png",
