@@ -20,7 +20,7 @@ export default defineConfig({
 					start_url: '.',
 					scope: '/',
 					display: 'standalone',
-					theme_color: '##306BFF',
+					theme_color: '#306BFF',
 					background_color: "#cfe2ff",
 					orientation: 'portrait',
 					display_override: ["window-controls-overlay"],
