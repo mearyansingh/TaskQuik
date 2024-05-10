@@ -1,6 +1,6 @@
 # TaskQuick
 
-![Thumbnail](https://github.com/mearyansingh/TicketTrek/blob/master/frontend/src/assets/images/og-image.png)
+![Thumbnail](https://github.com/mearyansingh/TaskQuik/blob/main/frontend/public/og-image.png)
 
 TaskQuick is a task management application built with ReactJS, ViteJS, Sass, Bootstrap 5, Node.js, Express.js, and MongoDB. It provides basic functionality for creating, reading, updating, and deleting tasks with an intuitive UI/UX, dark mode, and PWA (Progressive Web App) capabilities. The app is built using REST API architecture and follows the MVC (Model-View-Controller) pattern for a structured and scalable codebase.
 
